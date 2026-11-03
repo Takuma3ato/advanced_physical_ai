@@ -1,3 +1,6 @@
+## リポジトリ構成
+
+```
 .
 ├── simulation/
 │   ├── table_obstacle.sdf          # 障害物を配置したGazeboワールドファイル
@@ -9,3 +12,4 @@
 │   └── act_inference_node.py       # 完全自律ACT推論ノード（ステートマシン・CvBridge対応確定版）
 └── training/
     └── so100_act_training.ipynb    # Google Colabで実行した再学習用ノートブック（.ipynb）
+```
