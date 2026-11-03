@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="so100_world">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="libignition-gazebo-physics-system.so" name="ignition::gazebo::systems::Physics"/>
+    <plugin filename="libignition-gazebo-user-commands-system.so" name="ignition::gazebo::systems::UserCommands"/>
+    <plugin filename="libignition-gazebo-scene-broadcaster-system.so" name="ignition::gazebo::systems::SceneBroadcaster"/>
+    <plugin filename="libignition-gazebo-sensors-system.so" name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision"><geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry></collision>
+        <visual name="visual"><geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry><material><diffuse>0.8 0.8 0.8 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="work_table">
+      <static>true</static>
+      <pose>0.3 0 0.1 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.6 0.8 0.2</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.6 0.8 0.2</size></box></geometry><material><diffuse>0.6 0.6 0.6 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="obstacle_box">
+      <static>true</static>
+      <pose>0.28 0 0.23 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.02 0.15 0.06</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.02 0.15 0.06</size></box></geometry><material><diffuse>0.9 0.1 0.1 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="target_cube">
+      <static>false</static>
+      <pose>0.36 0 0.215 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.03</mass><inertia><ixx>0.000005</ixx><iyy>0.000005</iyy><izz>0.000005</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.03 0.03 0.03</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.03 0.03 0.03</size></box></geometry><material><diffuse>0.1 0.2 0.9 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="overhead_camera">
+      <static>true</static>
+      <pose>0.45 0.35 0.55 0 0.65 -2.4</pose>
+      <link name="link">
+        <sensor name="camera" type="camera">
+          <camera>
+            <horizontal_fov>1.05</horizontal_fov>
+            <image><width>224</width><height>224</height></image>
+            <clip><near>0.1</near><far>100</far></clip>
+          </camera>
+          <always_on>1</always_on><update_rate>50</update_rate><visualize>true</visualize>
+          <topic>/camera/image_raw</topic>
+        </sensor>
+      </link>
+    </model>
+  </world>
+</sdf>
